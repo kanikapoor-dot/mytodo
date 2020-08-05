@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mytodo/widgets/tasklist.dart';
+import 'package:mytodo/screens/bottomsheetscreen.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -10,7 +12,24 @@ class TasksScreen extends StatelessWidget {
         backgroundColor: Colors.orange,
         child: Icon(Icons.add),
         onPressed: () {
-
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: TaskScreenBottomSheet(),
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0)),
+            ),
+            backgroundColor: Colors.white,
+          );
         },
       ),
       body: SafeArea(
@@ -56,12 +75,14 @@ class TasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50.0),
-                      topRight: Radius.circular(50.0)),
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0)),
                 ),
+                child: TaskList(),
               ),
             ),
           ],
